@@ -20,11 +20,12 @@ module.exports.editorSockets = function (socketServer) {
                 socket.to(roomId).broadcast.emit('user-disconnected', userId);
                 console.log("user-disconnected : ", userId);
             })
+            socket.on('message', (evt) => {
+                console.log(evt);
+                socket.to(roomId).broadcast.emit('message', evt);
+            })
         })
-        socket.on('message', (evt) => {
-            console.log(evt);
-            socket.broadcast.emit('message', evt);
-        })
+
 
     });
 
