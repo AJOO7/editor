@@ -1,6 +1,6 @@
-const userController = require('../controllers/userController');
+const homecontroller = require('../controllers/homeController');
 const express = require('express');
 const router = express.Router();
-router.get('/', userController.userEditorCreate);
-router.get('/:room', userController.userEditor);
+router.get('/', homecontroller.home);
+router.use('/users', require('./users'));
 module.exports = router;
