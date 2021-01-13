@@ -11,7 +11,6 @@ editor.addEventListener("keyup", (evt) => {
 socket.on('message', (data) => {
     editor.value = data
 })
-// const socket = io('/');
 
 const videoGrid = document.getElementById('video-grid');
 const myPeer = new Peer(undefined, {
@@ -40,10 +39,7 @@ navigator.mediaDevices.getUserMedia({
     })
 
     socket.on('user-connected', userId => {
-        console.log("-------***--------");
-        console.log("user connected : ", userId);
         connectToNewUser(userId, stream);
-        console.log("-------***--------");
     });
 });
 
@@ -62,16 +58,11 @@ socket.on('user-disconnected', userId => {
 
 
 function connectToNewUser(userId, stream) {
-    console.log("######");
     const call = myPeer.call(userId, stream);
-    console.log("call defined");
     const video = document.createElement('video');
-    console.log("video element created");
     call.on('stream', userVideoStream => {
         addVideoStream(video, userVideoStream)
-        console.log("adding user video to other");
     })
-    console.log("######");
     call.on('close', () => {
         video.remove()
     })
