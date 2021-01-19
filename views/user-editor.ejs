@@ -1,7 +1,17 @@
 <link rel="stylesheet" href="/css/user-editor.css" />
+
+<script src="/cm/lib/codemirror.js"></script>
+<link rel="stylesheet" href="/cm/lib/codemirror.css" />
+<script src="/cm/mode/javascript/javascript.js"></script>
+<script src="/cm/addon/edit/closetag.js"></script>
+<link rel="stylesheet" href="/cm/theme/dracula.css" />
+
 <div class="editor-container">
   <div class="editor-main">
-    <div class="room-container" style="display: flex; flex-direction: row">
+    <div
+      class="room-container"
+      style="display: flex; flex-direction: row; height: 20px"
+    >
       <p>Room id-></p>
       <div id="rooom"><%= roomId %></div>
       <button
@@ -11,7 +21,7 @@
         <p style="margin-bottom: 0; padding: 0">Copy</p>
       </button>
     </div>
-    <textarea id="editor" placeholder="#include ......."></textarea>
+    <textarea id="editor"></textarea>
   </div>
 </div>
 <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js" defer></script>
@@ -21,6 +31,17 @@
 ></script>
 <script src="/js/script.js" defer></script>
 <script>
+  let mirrorEditor = CodeMirror.fromTextArea(
+    document.getElementById("editor"),
+    {
+      mode: "javascript",
+      theme: "dracula",
+      lineNumbers: true,
+      autoCloseTags: true,
+    }
+  );
+  mirrorEditor.setSize("100%", "100%");
+
   const ROOM_ID = "<%= roomId %>";
   function copyToClipboard(element) {
     var $temp = $("<input>");
