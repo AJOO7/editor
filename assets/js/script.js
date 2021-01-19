@@ -13,13 +13,27 @@ var socket = io('/');
 // mirrorEditor.setSize("100%", "100%");
 // adding event listener for keyup on the text area
 const editor = document.getElementById("editor");
-const mirrorEditor = CodeMirror.fromTextArea(editor, { mode: "javascript", theme: "dracula", lineNumbers: true, autoCloseTags: true, autoCloseBrackets: true });
+const mirrorEditor = CodeMirror.fromTextArea(
+    editor,
+    {
+        mode: "javascript",
+        theme: "dracula",
+        lineNumbers: true,
+        autoCloseTags: true,
+        autoCloseBrackets: true,
+    });
 mirrorEditor.setSize("100%", "100%");
 mirrorEditor.on("keyup", function (evt) {
     const text = mirrorEditor.getValue();
     socket.send(text)
     console.log(text, "1", text.length);
 })
+var input = document.getElementById("select");
+function selectTheme() {
+    var theme = input.options[input.selectedIndex].textContent;
+    mirrorEditor.setOption("theme", theme);
+    // location.hash = "#" + theme;
+}
 // editor.addEventListener("keyup", (evt) => {
 //     const text = editor.value
 //     socket.send(text)

@@ -3,8 +3,80 @@
 <script src="/cm/lib/codemirror.js"></script>
 <link rel="stylesheet" href="/cm/lib/codemirror.css" />
 <script src="/cm/mode/javascript/javascript.js"></script>
+
+<!-- adding edit section of code mirror -->
 <script src="/cm/addon/edit/closetag.js"></script>
+<script src="/cm/addon/edit/closebrackets.js"></script>
+<script src="/cm/addon/edit/continuelist.js"></script>
+<script src="/cm/addon/edit/matchbrackets.js"></script>
+<script src="/cm/addon/edit/matchtags.js"></script>
+<script src="/cm/addon/edit/trailingspace.js"></script>
+
+<!-- adding themes for theme section -->
 <link rel="stylesheet" href="/cm/theme/dracula.css" />
+<link rel="stylesheet" href="/cm/theme/3024-day.css" />
+<link rel="stylesheet" href="/cm/theme/3024-night.css" />
+<link rel="stylesheet" href="/cm/theme/abcdef.css" />
+<link rel="stylesheet" href="/cm/theme/ambiance-mobile.css" />
+<link rel="stylesheet" href="/cm/theme/ambiance.css" />
+<link rel="stylesheet" href="/cm/theme/ayu-dark.css" />
+<link rel="stylesheet" href="/cm/theme/ayu-mirage.css" />
+<link rel="stylesheet" href="/cm/theme/base16-dark.css" />
+<link rel="stylesheet" href="/cm/theme/base16-light.css" />
+<link rel="stylesheet" href="/cm/theme/bespin.css" />
+<link rel="stylesheet" href="/cm/theme/blackboard.css" />
+<link rel="stylesheet" href="/cm/theme/cobalt.css" />
+<link rel="stylesheet" href="/cm/theme/colorforth.css" />
+<link rel="stylesheet" href="/cm/theme/darcula.css" />
+<link rel="stylesheet" href="/cm/theme/dracula.css" />
+<link rel="stylesheet" href="/cm/theme/duotone-dark.css" />
+<link rel="stylesheet" href="/cm/theme/duotone-light.css" />
+<link rel="stylesheet" href="/cm/theme/eclipse.css" />
+<link rel="stylesheet" href="/cm/theme/elegant.css" />
+<link rel="stylesheet" href="/cm/theme/erlang-dark.css" />
+<link rel="stylesheet" href="/cm/theme/gruvbox-dark.css" />
+<link rel="stylesheet" href="/cm/theme/hopscotch.css" />
+<link rel="stylesheet" href="/cm/theme/icecoder.css" />
+<link rel="stylesheet" href="/cm/theme/idea.css" />
+<link rel="stylesheet" href="/cm/theme/isotope.css" />
+<link rel="stylesheet" href="/cm/theme/lesser-dark.css" />
+<link rel="stylesheet" href="/cm/theme/liquibyte.css" />
+<link rel="stylesheet" href="/cm/theme/lucario.css" />
+<link rel="stylesheet" href="/cm/theme/material-darker.css" />
+<link rel="stylesheet" href="/cm/theme/material-ocean.css" />
+<link rel="stylesheet" href="/cm/theme/material-palenight.css" />
+<link rel="stylesheet" href="/cm/theme/material.css" />
+<link rel="stylesheet" href="/cm/theme/mbo.css" />
+<link rel="stylesheet" href="/cm/theme/mdn-like.css" />
+<link rel="stylesheet" href="/cm/theme/midnight.css" />
+<link rel="stylesheet" href="/cm/theme/monokai.css" />
+<link rel="stylesheet" href="/cm/theme/moxer.css" />
+<link rel="stylesheet" href="/cm/theme/neat.css" />
+<link rel="stylesheet" href="/cm/theme/neo.css" />
+<link rel="stylesheet" href="/cm/theme/night.css" />
+<link rel="stylesheet" href="/cm/theme/nord.css" />
+<link rel="stylesheet" href="/cm/theme/oceanic-next.css" />
+<link rel="stylesheet" href="/cm/theme/panda-syntax.css" />
+<link rel="stylesheet" href="/cm/theme/paraiso-dark.css" />
+<link rel="stylesheet" href="/cm/theme/paraiso-light.css" />
+<link rel="stylesheet" href="/cm/theme/pastel-on-dark.css" />
+<link rel="stylesheet" href="/cm/theme/railscasts.css" />
+<link rel="stylesheet" href="/cm/theme/rubyblue.css" />
+<link rel="stylesheet" href="/cm/theme/seti.css" />
+<link rel="stylesheet" href="/cm/theme/shadowfox.css" />
+<link rel="stylesheet" href="/cm/theme/solarized.css" />
+<link rel="stylesheet" href="/cm/theme/ssms.css" />
+<link rel="stylesheet" href="/cm/theme/the-matrix.css" />
+<link rel="stylesheet" href="/cm/theme/tomorrow-night-bright.css" />
+<link rel="stylesheet" href="/cm/theme/tomorrow-night-eighties.css" />
+<link rel="stylesheet" href="/cm/theme/ttcn.css" />
+<link rel="stylesheet" href="/cm/theme/twilight.css" />
+<link rel="stylesheet" href="/cm/theme/vibrant-ink.css" />
+<link rel="stylesheet" href="/cm/theme/xq-dark.css" />
+<link rel="stylesheet" href="/cm/theme/xq-light.css" />
+<link rel="stylesheet" href="/cm/theme/yeti.css" />
+<link rel="stylesheet" href="/cm/theme/yonce.css" />
+<link rel="stylesheet" href="/cm/theme/zenburn.css" />
 
 <div class="editor-container">
   <div class="editor-main">
@@ -21,6 +93,71 @@
         <p style="margin-bottom: 0; padding: 0">Copy</p>
       </button>
     </div>
+    <select onchange="selectTheme()" id="select">
+      <option selected="">default</option>
+      <option>3024-day</option>
+      <option>3024-night</option>
+      <option>abcdef</option>
+      <option>ambiance</option>
+      <option>ayu-dark</option>
+      <option>ayu-mirage</option>
+      <option>base16-dark</option>
+      <option>base16-light</option>
+      <option>bespin</option>
+      <option>blackboard</option>
+      <option>cobalt</option>
+      <option>colorforth</option>
+      <option>darcula</option>
+      <option>dracula</option>
+      <option>duotone-dark</option>
+      <option>duotone-light</option>
+      <option>eclipse</option>
+      <option>elegant</option>
+      <option>erlang-dark</option>
+      <option>gruvbox-dark</option>
+      <option>hopscotch</option>
+      <option>icecoder</option>
+      <option>idea</option>
+      <option>isotope</option>
+      <option>lesser-dark</option>
+      <option>liquibyte</option>
+      <option>lucario</option>
+      <option>material</option>
+      <option>material-darker</option>
+      <option>material-palenight</option>
+      <option>material-ocean</option>
+      <option>mbo</option>
+      <option>mdn-like</option>
+      <option>midnight</option>
+      <option>monokai</option>
+      <option>moxer</option>
+      <option>neat</option>
+      <option>neo</option>
+      <option>night</option>
+      <option>nord</option>
+      <option>oceanic-next</option>
+      <option>panda-syntax</option>
+      <option>paraiso-dark</option>
+      <option>paraiso-light</option>
+      <option>pastel-on-dark</option>
+      <option>railscasts</option>
+      <option>rubyblue</option>
+      <option>seti</option>
+      <option>shadowfox</option>
+      <option>solarized dark</option>
+      <option>solarized light</option>
+      <option>the-matrix</option>
+      <option>tomorrow-night-bright</option>
+      <option>tomorrow-night-eighties</option>
+      <option>ttcn</option>
+      <option>twilight</option>
+      <option>vibrant-ink</option>
+      <option>xq-dark</option>
+      <option>xq-light</option>
+      <option>yeti</option>
+      <option>yonce</option>
+      <option>zenburn</option>
+    </select>
     <textarea id="editor"></textarea>
   </div>
 </div>
@@ -31,17 +168,6 @@
 ></script>
 <script src="/js/script.js" defer></script>
 <script>
-  let mirrorEditor = CodeMirror.fromTextArea(
-    document.getElementById("editor"),
-    {
-      mode: "javascript",
-      theme: "dracula",
-      lineNumbers: true,
-      autoCloseTags: true,
-    }
-  );
-  mirrorEditor.setSize("100%", "100%");
-
   const ROOM_ID = "<%= roomId %>";
   function copyToClipboard(element) {
     var $temp = $("<input>");
