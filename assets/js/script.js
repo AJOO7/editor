@@ -34,6 +34,11 @@ function selectTheme() {
     mirrorEditor.setOption("theme", theme);
     // location.hash = "#" + theme;
 }
+var inputLang = document.getElementById("selectLang");
+function selectLang() {
+    var lang = inputLang.options[inputLang.selectedIndex].textContent;
+    mirrorEditor.setOption("mode", lang);
+}
 // editor.addEventListener("keyup", (evt) => {
 //     const text = editor.value
 //     socket.send(text)
