@@ -49,6 +49,26 @@ function selectLang() {
     var lang = inputLang.options[inputLang.selectedIndex].textContent;
     mirrorEditor.setOption("mode", lang);
 }
+
+let fileInput = document.getElementById("fileInput");
+fileInput.addEventListener('change', () => {
+    let files = fileInput.files;
+
+    if (files.length == 0) return;
+    const file = files[0];
+    let reader = new FileReader();
+    reader.onload = (e) => {
+        const file = e.target.result;
+        const lines = file.split(/\r\n|\n/);
+        mirrorEditor.setValue(lines.join('\n'));
+
+    };
+
+    reader.onerror = (e) => alert(e.target.error.name);
+
+    reader.readAsText(file);
+});
+
 $("#download").click(function (e) {
 
     e.preventDefault();
