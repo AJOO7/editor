@@ -28,6 +28,10 @@ mirrorEditor.on("keyup", function (evt) {
     socket.send(text)
     console.log(text, "1", text.length);
 })
+
+function reset() {
+    mirrorEditor.setValue("");
+}
 var input = document.getElementById("select");
 function selectTheme() {
     var theme = input.options[input.selectedIndex].textContent;
