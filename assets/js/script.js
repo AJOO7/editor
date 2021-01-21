@@ -49,6 +49,35 @@ function selectLang() {
     var lang = inputLang.options[inputLang.selectedIndex].textContent;
     mirrorEditor.setOption("mode", lang);
 }
+$("#download").click(function (e) {
+
+    e.preventDefault();
+    saveTextAsFile();
+});
+function saveTextAsFile() {
+    var textToWrite = mirrorEditor.getValue();
+    console.log(mirrorEditor.getValue());
+    console.log("and", textToWrite);
+    var textFileAsBlob = new Blob([mirrorEditor.getValue()], { type: 'application/json' });
+    var fileNameToSaveAs = +Date.now() + ".txt";
+
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "My Hidden Link";
+
+    window.URL = window.URL || window.webkitURL;
+
+    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+
+    downloadLink.click();
+}
+
+function destroyClickedElement(event) {
+    document.body.removeChild(event.target);
+}
 // editor.addEventListener("keyup", (evt) => {
 //     const text = editor.value
 //     socket.send(text)
