@@ -28,7 +28,13 @@ mirrorEditor.on("keyup", function (evt) {
     socket.send(text)
     console.log(text, "1", text.length);
 })
-
+function copyToClipboard() {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(mirrorEditor.getValue()).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
 function reset() {
     mirrorEditor.setValue("");
 }
