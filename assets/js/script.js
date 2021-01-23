@@ -1,4 +1,17 @@
 var socket = io('/');
+// selecting the editor
+// const editor = document.getElementById("editor");
+// let mirrorEditor = CodeMirror.fromTextArea(
+//     document.getElementById("editor"),
+//     {
+//         mode: "javascript",
+//         theme: "dracula",
+//         lineNumbers: true,
+//         autoCloseTags: true,
+//     }
+// );
+// mirrorEditor.setSize("100%", "100%");
+// adding event listener for keyup on the text area
 const editor = document.getElementById("editor");
 const mirrorEditor = CodeMirror.fromTextArea(
     editor,
@@ -15,6 +28,18 @@ mirrorEditor.on("keyup", function (evt) {
     socket.send(text)
     console.log(text, "1", text.length);
 })
+// var input = document.getElementById("select");
+// function selectTheme() {
+//     var theme = input.options[input.selectedIndex].textContent;
+//     mirrorEditor.setOption("theme", theme);
+//     // location.hash = "#" + theme;
+// }
+// var inputLang = document.getElementById("selectLang");
+// function selectLang() {
+//     var lang = inputLang.options[inputLang.selectedIndex].textContent;
+//     mirrorEditor.setOption("mode", lang);
+// }
+
 function copyToClipboard() {
     var $temp = $("<input>");
     $("body").append($temp);
@@ -22,11 +47,13 @@ function copyToClipboard() {
     document.execCommand("copy");
     $temp.remove();
 }
+
 function reset() {
     mirrorEditor.setValue("");
 }
 var input = document.getElementById("select");
 function selectTheme() {
+
     var theme = input.options[input.selectedIndex].textContent;
     mirrorEditor.setOption("theme", theme);
 }
@@ -61,6 +88,9 @@ $("#download").click(function (e) {
     saveTextAsFile();
 });
 function saveTextAsFile() {
+    var textToWrite = mirrorEditor.getValue();
+    console.log(mirrorEditor.getValue());
+    console.log("and", textToWrite);
     var textFileAsBlob = new Blob([mirrorEditor.getValue()], { type: 'application/json' });
     var fileNameToSaveAs = +Date.now() + ".txt";
 
@@ -82,9 +112,23 @@ function destroyClickedElement(event) {
     document.body.removeChild(event.target);
 }
 
+
+
+
+
+
+
+// editor.addEventListener("keyup", (evt) => {
+//     const text = editor.value
+//     socket.send(text)
+// })
+
+// sending data
 socket.on('message', (data) => {
     mirrorEditor.setValue(data);
+    // editor.value = data
 })
+// const socket = io('/');
 
 const videoGrid = document.getElementById('video-grid');
 const myPeer = new Peer(undefined, {
@@ -113,7 +157,10 @@ navigator.mediaDevices.getUserMedia({
     })
 
     socket.on('user-connected', userId => {
+        console.log("-------***--------");
+        console.log("user connected : ", userId);
         connectToNewUser(userId, stream);
+        console.log("-------***--------");
     });
 });
 
@@ -132,11 +179,16 @@ socket.on('user-disconnected', userId => {
 
 
 function connectToNewUser(userId, stream) {
+    console.log("######");
     const call = myPeer.call(userId, stream);
+    console.log("call defined");
     const video = document.createElement('video');
+    console.log("video element created");
     call.on('stream', userVideoStream => {
         addVideoStream(video, userVideoStream)
+        console.log("adding user video to other");
     })
+    console.log("######");
     call.on('close', () => {
         video.remove()
     })
@@ -150,4 +202,53 @@ function addVideoStream(video, stream) {
         video.play()
     })
     videoGrid.append(video)
+}
+const playButton = document.getElementById('play-button')
+const pauseButton = document.getElementById('pause-button')
+const stopButton = document.getElementById('stop-button')
+const speedInput = document.getElementById('speed')
+let currentCharacter
+
+playButton.addEventListener('click', () => {
+    console.log("PLAYING ", mirrorEditor.getValue());
+    playText(mirrorEditor.getValue())
+})
+pauseButton.addEventListener('click', pauseText)
+stopButton.addEventListener('click', stopText)
+speedInput.addEventListener('input', () => {
+
+    stopText()
+    playText(utterance.text.substring(currentCharacter))
+
+})
+
+const utterance = new SpeechSynthesisUtterance()
+utterance.addEventListener('end', () => {
+    mirrorEditor.setOption("readOnly", false);
+})
+utterance.addEventListener('boundary', e => {
+    currentCharacter = e.charIndex
+})
+
+function playText(text) {
+    if (speechSynthesis.paused && speechSynthesis.speaking) {
+        return speechSynthesis.resume()
+    }
+    if (speechSynthesis.speaking) return
+    utterance.text = text
+    utterance.rate = speedInput.value || 1
+    mirrorEditor.setOption("readOnly", true);
+    speechSynthesis.speak(utterance)
+}
+
+function pauseText() {
+    if (speechSynthesis.speaking) {
+        speechSynthesis.pause()
+    }
+    return
+}
+
+function stopText() {
+    speechSynthesis.resume()
+    speechSynthesis.cancel()
 }
