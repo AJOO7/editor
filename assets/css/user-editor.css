@@ -15,7 +15,6 @@
     height: 80vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 10px;
     background-color: #fafdffbd;
     margin: 10px;
@@ -26,6 +25,9 @@
 
 }
 
+.room-container{
+    margin: auto;
+}
 textarea {
     resize: none;
     height: 100%;
@@ -67,3 +69,27 @@ video {
     padding: 0;
     margin-bottom: 0;
 }
+.utility-container{
+    display: flex;
+    flex-flow: row;
+    align-content: space-between;
+    margin-bottom: 5px;
+}
+
+.left{
+    display: flex;
+    align-content: flex-start;
+    margin-right: 50.5%;
+}
+
+
+/*
+#select{
+    display: inline;
+    float: right;
+}
+
+#selectLang{
+    display: inline;
+    float: right;
+}*/
