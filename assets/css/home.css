@@ -41,30 +41,35 @@
     align-items: center;
     justify-content: center;
 }
-
-.index-animation .sign-up {
+/*
+.index-animation .connect {
     font-size: 1.5vw;
     padding: 5px;
-    border: 1px solid blue;
-    border-radius: 15px;
-    /* position: relative;
+    color: #ffffff;
+    background-color: #7a87ff;
+    border-radius: 2.5%;    /* position: relative;
     top: 10vh;
-    right: 5vw; */
-}
+    right: 5vw; *
+}*/
 
-.index-animation .sign-in {
+.index-animation .connect {
     font-size: 1.5vw;
     padding: 5px;
-    border: 1px solid blue;
+    color: #ffffff;
+    background-color: #7a87ff;
     border-radius: 15px;
     /* position: relative;
 top: 10vh;
 left: 5vw; */
 }
+#join {
+    margin-bottom: 4px;
+}
 
-.index-animation :hover {
+.index-animation .connect:hover {
     text-decoration: none;
-    color: black;
+    background-color: #5868fd;
+    border-radius: 15px; 
 }
 
 #myInput {
